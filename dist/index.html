@@ -9,13 +9,117 @@
   <body>
     <section class="container">
       <h1 class="container__header"></h1>
-      <section class="container__books"></section>
+
+      <section class="container__books">
+        <section class="first-section-wrapper">
+          <section class="container__book margaret-wise-brown">
+            <section class="container__book__info">
+              <h1 class="container__title">Goodnight Moon</h1>
+              <p class="container__author">Margaret Wise Brown</p>
+            </section>
+          </section>
+          <section class="container__book eric-carle">
+            <section class="container__book__info">
+              <h1 class="container__title">The Very Hungry Caterpillar</h1>
+              <p class="container__author">Eric Carle</p>
+            </section>
+          </section>
+          <section class="container__book madeleine">
+            <section class="container__book__info">
+              <h1 class="container__title">A Wrinkle in Time</h1>
+              <p class="container__author">"Madeleine L’Engle</p>
+            </section>
+          </section>
+          <section class="container__book crockett">
+            <section class="container__book__info">
+              <h1 class="container__title">Harold and the Purple Crayon</h1>
+              <p class="container__author">Crockett Johnson</p>
+            </section>
+          </section>
+        </section>
+        <section class="second-section-wrapper">
+          <section class="container__book maurice">
+            <section class="container__book__info">
+              <h1 class="container__title">Where the Wild Things Are</h1>
+              <p class="container__author">Maurice Sendak</p>
+            </section>
+          </section>
+          <section class="container__book ludwig">
+            <section class="container__book__info">
+              <h1 class="container__title">Madeline</h1>
+              <p class="container__author">Ludwig Bemelmans</p>
+            </section>
+          </section>
+          <section class="container__book beatrix">
+            <section class="container__book__info">
+              <h1 class="container__title">The Tale of Peter Rabbit</h1>
+              <p class="container__author">Beatrix Potter</p>
+            </section>
+          </section>
+          <section class="container__book eb">
+            <section class="container__book__info">
+              <h1 class="container__title">Charlotte’s Web</h1>
+              <p class="container__author">E. B. White</p>
+            </section>
+          </section>
+        </section>
+      </section>
       <section class="container__input">
         <label for="search">Search Book:</label>
         <input type="text" id="search" name="search" />
       </section>
     </section>
-    <section class="overlay"></section>
+    <section class="overlay">
+      <section class="overlay__main">
+        <section class="overlay__icon-wrapper">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="m6.921 12.5l5.439 5.439q.146.146.153.344q.006.198-.16.363q-.164.16-.353.163q-.188.002-.354-.163l-6.08-6.08q-.131-.132-.184-.268T5.329 12t.053-.298t.184-.267l6.08-6.081q.14-.14.341-.15q.202-.01.367.15q.165.165.165.356q0 .192-.165.357L6.92 11.5H18.5q.214 0 .357.143T19 12t-.143.357t-.357.143z"
+            />
+          </svg>
+        </section>
+        <section class="overlay__main-info">
+          <section class="overlay__content-wrapper">
+            <section class="overlay__book-img">
+              <section class="overlay__book-img__wrapper">
+                <h1 class="overlay__book-img__wrapper__title"></h1>
+                <p class="overlay__book-img__wrapper__author"></p>
+              </section>
+            </section>
+            <section class="overlay__book-info">
+              <h1 class="overlay__book-info__title"></h1>
+              <p class="overlay__book-info__author"></p>
+              <p class="overlay__book-info__text"></p>
+              <section class="overlay__book-info__about">
+                <section class="overlay__book-info__about__first-wrapper">
+                  <p
+                    class="overlay__book-info__about__first-wrapper__audience"
+                  ></p>
+                  <p
+                    class="overlay__book-info__about__first-wrapper__published"
+                  ></p>
+                </section>
+                <section class="overlay__book-info__about__second-wrapper">
+                  <p
+                    class="overlay__book-info__about__second-wrapper__pages"
+                  ></p>
+                  <p
+                    class="overlay__book-info__about__second-wrapper__publisher"
+                  ></p>
+                </section>
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+      <button>I want to read it</button>
+    </section>
 
     <script src="./index.js"></script>
   </body>
