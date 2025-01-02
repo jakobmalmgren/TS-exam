@@ -12,39 +12,27 @@ body {
 }
 .container {
   width: 95%;
-  height: 95%;
+  height: 85%;
+  display: grid;
 }
 .container__header {
   font-size: 2rem;
   height: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .container__books {
   height: 90%;
-  /* border: 1px solid red; */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
 }
-.first-section-wrapper {
-  display: flex;
-  height: 45%;
-  /* background-color: red; */
-  width: 100%;
-  justify-content: space-between;
-}
-.second-section-wrapper {
-  /* background-color: green; */
-  height: 45%;
 
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-}
 .container__input {
   height: 5%;
 }
 .container__book {
-  width: 20%;
   border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
@@ -79,7 +67,6 @@ body {
   width: 85%;
   height: 85%;
 
-  /* background-color: red; */
   max-width: 800px;
   display: flex;
   flex-direction: column;
