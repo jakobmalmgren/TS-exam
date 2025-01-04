@@ -1,4 +1,5 @@
 import { Book } from "./interfaces/Book";
+import { getData } from "./fetchApi.js"; // varför js när de e ts??
 
 const containerHeaderEl = document.querySelector(
   ".container__header"
@@ -38,6 +39,13 @@ const pagesEL: Element | null = document.querySelector(
 const publisherEl: Element | null = document.querySelector(
   ".overlay__book-info__about__second-wrapper__publisher"
 );
+const bookContainer: Element | null =
+  document.querySelector(".container__books");
+
+let containerBookel: NodeListOf<Element> =
+  document.querySelectorAll(".container__book");
+
+getData();
 
 const contentBooks = async (index: number): Promise<void> => {
   const data: Book[] = await getData();
@@ -73,31 +81,9 @@ const contentBooks = async (index: number): Promise<void> => {
   overlayEl.style.display = "flex";
 };
 
-const getData = async (): Promise<Book[]> => {
-  let data: Book[] = [];
-  try {
-    const response = await fetch(
-      "https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books"
-    );
-    data = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-
-  return data;
-};
-
-getData();
-
 iconEl.addEventListener("click", (): void => {
   overlayEl.style.display = "none";
 });
-
-const bookContainer: Element | null =
-  document.querySelector(".container__books");
-
-let containerBookel: NodeListOf<Element> =
-  document.querySelectorAll(".container__book");
 
 const renderMainPageInfo = async (): Promise<void> => {
   try {
@@ -108,6 +94,7 @@ const renderMainPageInfo = async (): Promise<void> => {
     if (bookContainer) {
       for (let i = 0; i < data.length; i++) {
         bookContainer.innerHTML += `   <section class="container__book" data-id="${data[i].id}"  style="background-color: ${data[i].color}">
+        <div class = "container__book__detail"> </div>
         <section class="container__book__info">
           <h1 class="container__title">${data[i].title}</h1>
           <p class="container__author">${data[i].author}</p>
@@ -144,15 +131,20 @@ const renderMainPageInfo = async (): Promise<void> => {
   }
 };
 
+// containerBookel
+// contentBooks
+// måste fixa så de blir dynamiskt med id etc om man ex skulle lögga til fler böcker i databasen
+
 renderMainPageInfo();
 
 const searchFieldEl = document.querySelector("#search") as HTMLInputElement;
+
 searchFieldEl?.addEventListener("input", async (e: Event) => {
   const data = await getData();
   const target = e.target as HTMLInputElement;
   console.log(target.value);
   let dataDisplay = data
-    .filter((data) => {
+    .filter((data: Book) => {
       if (target.value === "") {
         return data;
       } else if (
@@ -163,8 +155,9 @@ searchFieldEl?.addEventListener("input", async (e: Event) => {
         return data;
       }
     })
-    .map((data) => {
+    .map((data: Book) => {
       return `   <section class="container__book" data-id="${data.id}" style="background-color: ${data.color}">
+      <div class = "container__book__detail"> </div>
         <section class="container__book__info">
           <h1 class="container__title">${data.title}</h1>
           <p class="container__author">${data.author}</p>
@@ -177,6 +170,7 @@ searchFieldEl?.addEventListener("input", async (e: Event) => {
   }
 
   containerBookel = document.querySelectorAll(".container__book");
+
   containerBookel.forEach((el: Element) => {
     el.addEventListener("click", () => {
       const bookId = (el as HTMLElement).getAttribute("data-id");
@@ -196,6 +190,7 @@ searchFieldEl?.addEventListener("input", async (e: Event) => {
 });
 
 //att göra
+
 //styla css html
 // statiska typer och interface
 // Ha delat upp din kod i moduler i Typescript, alla interface ska ligga i en egen modul och importeras.

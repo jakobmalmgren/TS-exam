@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: sans-serif;
+  font-family: ui-monospace;
 }
 body {
   background-color: aqua;
@@ -11,32 +11,54 @@ body {
   align-items: center;
 }
 .container {
-  width: 95%;
-  height: 85%;
+  width: 75%;
+  height: 95%;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 0.2fr 0.7fr 0.1fr;
+  /* background-color: green; */
+  gap: 1rem;
 }
 .container__header {
   font-size: 2rem;
-  height: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
+  grid-column: 1/5;
+  grid-row: 1/2;
 }
 .container__books {
-  height: 90%;
+  /* background-color: red; */
   display: grid;
+  grid-column: 1/5;
+  grid-row: 2/5;
   gap: 1rem;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 }
 
-.container__input {
-  height: 5%;
-}
+/* den genererade html:ens css via JS börjar */
+
 .container__book {
   border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
+  position: relative;
 }
+.container__book:hover {
+  scale: 1.02;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.container__book__detail {
+  width: 2px;
+  height: 100%;
+  background-color: rgb(98, 76, 76);
+  position: absolute;
+  left: 5%;
+}
+
 .container__book__info {
   width: 100%;
   height: 100%;
@@ -51,12 +73,16 @@ body {
 .container__author {
   padding: 6px;
 }
+
+/* den genererade html:ens css via JS slutar */
+
+/* modalen/overlay css börjar  */
+
 .overlay {
   position: absolute;
   width: 95%;
   height: 95%;
   background-color: rgb(47, 46, 46);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,7 +92,6 @@ body {
 .overlay__main {
   width: 85%;
   height: 85%;
-
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -83,7 +108,6 @@ body {
   cursor: pointer;
 }
 .overlay__main-info {
-  /* background-color: grey; */
   width: 100%;
   height: 80%;
 }
@@ -97,8 +121,15 @@ body {
   width: 45%;
   height: 100%;
   border-radius: 1rem;
-  padding: 0.5rem;
-  /* background-color: green; */
+  position: relative;
+}
+
+.overlay__book__detail {
+  width: 2px;
+  height: 100%;
+  background-color: rgb(98, 76, 76);
+  position: absolute;
+  left: 5%;
 }
 .overlay__book-img__wrapper {
   width: 100%;
@@ -109,7 +140,7 @@ body {
   flex-direction: column;
 }
 .overlay__book-img__wrapper h1 {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   padding: 6px;
 }
 
@@ -121,7 +152,6 @@ body {
   width: 45%;
   height: 100%;
   border-radius: 1rem;
-  /* background-color: purple; */
   border: 1px solid rgb(255, 255, 255);
   padding: 0.5rem;
 }
@@ -136,13 +166,11 @@ body {
 }
 .overlay__book-info__text {
   margin-bottom: 1rem;
-
   color: white;
 }
 
 .overlay__book-info__about {
   color: white;
-  /* border: 1px solid black; */
   width: 100%;
   height: 20%;
   display: flex;
@@ -169,8 +197,11 @@ body {
 
 button {
   position: absolute;
-  /* right: 10px; */
-  bottom: 0px;
+  top: 1rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  border-radius: 10px;
+  border: none;
 }
+
+/* modalen/overlay css slutar  */

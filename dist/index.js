@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { getData } from "./fetchApi.js"; // varför js när de e ts??
 const containerHeaderEl = document.querySelector(".container__header");
 const overlayEl = document.querySelector(".overlay");
 const iconEl = document.querySelector(".overlay__icon-wrapper");
@@ -20,6 +21,9 @@ const audienceEl = document.querySelector(".overlay__book-info__about__first-wra
 const publishedEL = document.querySelector(".overlay__book-info__about__first-wrapper__published");
 const pagesEL = document.querySelector(".overlay__book-info__about__second-wrapper__pages");
 const publisherEl = document.querySelector(".overlay__book-info__about__second-wrapper__publisher");
+const bookContainer = document.querySelector(".container__books");
+let containerBookel = document.querySelectorAll(".container__book");
+getData();
 const contentBooks = (index) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield getData();
     bookColorEl.style.backgroundColor = `${data[index].color}`;
@@ -52,23 +56,9 @@ const contentBooks = (index) => __awaiter(void 0, void 0, void 0, function* () {
     }
     overlayEl.style.display = "flex";
 });
-const getData = () => __awaiter(void 0, void 0, void 0, function* () {
-    let data = [];
-    try {
-        const response = yield fetch("https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books");
-        data = yield response.json();
-    }
-    catch (error) {
-        console.log(error);
-    }
-    return data;
-});
-getData();
 iconEl.addEventListener("click", () => {
     overlayEl.style.display = "none";
 });
-const bookContainer = document.querySelector(".container__books");
-let containerBookel = document.querySelectorAll(".container__book");
 const renderMainPageInfo = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield getData();
@@ -76,6 +66,7 @@ const renderMainPageInfo = () => __awaiter(void 0, void 0, void 0, function* () 
         if (bookContainer) {
             for (let i = 0; i < data.length; i++) {
                 bookContainer.innerHTML += `   <section class="container__book" data-id="${data[i].id}"  style="background-color: ${data[i].color}">
+        <div class = "container__book__detail"> </div>
         <section class="container__book__info">
           <h1 class="container__title">${data[i].title}</h1>
           <p class="container__author">${data[i].author}</p>
@@ -117,6 +108,9 @@ const renderMainPageInfo = () => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
     }
 });
+// containerBookel
+// contentBooks
+// måste fixa så de blir dynamiskt med id etc om man ex skulle lögga til fler böcker i databasen
 renderMainPageInfo();
 const searchFieldEl = document.querySelector("#search");
 searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addEventListener("input", (e) => __awaiter(void 0, void 0, void 0, function* () {
@@ -136,6 +130,7 @@ searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addE
     })
         .map((data) => {
         return `   <section class="container__book" data-id="${data.id}" style="background-color: ${data.color}">
+      <div class = "container__book__detail"> </div>
         <section class="container__book__info">
           <h1 class="container__title">${data.title}</h1>
           <p class="container__author">${data.author}</p>
@@ -161,7 +156,6 @@ searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addE
         });
     });
 }));
-export {};
 //att göra
 //styla css html
 // statiska typer och interface
