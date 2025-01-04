@@ -64,7 +64,7 @@ const renderMainPageInfo = () => __awaiter(void 0, void 0, void 0, function* () 
 });
 renderMainPageInfo();
 // skulle kunna göra om så när containerBookEl jobbar med
-//contentBooks så de blir mer dynamiskt när man nån kanske lägger till
+//contentBooks så de blir mer dynamiskt när nån kanske lägger till
 // fler böcker i API:t, men det fungerar för denna uppg.
 searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addEventListener("input", (e) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield getData();

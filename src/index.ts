@@ -64,7 +64,7 @@ const renderMainPageInfo = async (): Promise<void> => {
 renderMainPageInfo();
 
 // skulle kunna göra om så när containerBookEl jobbar med
-//contentBooks så de blir mer dynamiskt när man nån kanske lägger till
+//contentBooks så de blir mer dynamiskt när nån kanske lägger till
 // fler böcker i API:t, men det fungerar för denna uppg.
 
 searchFieldEl?.addEventListener("input", async (e: Event) => {
