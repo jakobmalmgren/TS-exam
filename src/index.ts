@@ -1,89 +1,19 @@
-import { Book } from "./interfaces/Book";
-import { getData } from "./fetchApi.js"; // varför js när de e ts??
+import { Book } from "./interfaces/Book.js";
+import {
+  overlayEl,
+  iconEl,
+  bookContainer,
+  searchFieldEl,
+  containerHeaderEl,
+} from "./variables.js";
+import { getData } from "./fetchApi.js";
+import { contentBooks } from "./modalRender.js";
 
-const containerHeaderEl = document.querySelector(
-  ".container__header"
-) as HTMLElement;
-
-const overlayEl = document.querySelector(".overlay") as HTMLElement;
-
-const iconEl = document.querySelector(".overlay__icon-wrapper") as HTMLElement;
-
-const bookColorEl = document.querySelector(".overlay__book-img") as HTMLElement;
-const titleEl: Element | null = document.querySelector(
-  ".overlay__book-info__title"
-);
-const authorEl: Element | null = document.querySelector(
-  ".overlay__book-info__author"
-);
-const bookImageTitleEl: Element | null = document.querySelector(
-  ".overlay__book-img__wrapper__title"
-);
-
-const bookImageAuthorEl: Element | null = document.querySelector(
-  ".overlay__book-img__wrapper__author"
-);
-
-const infoTextEL: Element | null = document.querySelector(
-  ".overlay__book-info__text"
-);
-const audienceEl: Element | null = document.querySelector(
-  ".overlay__book-info__about__first-wrapper__audience"
-);
-const publishedEL: Element | null = document.querySelector(
-  ".overlay__book-info__about__first-wrapper__published"
-);
-const pagesEL: Element | null = document.querySelector(
-  ".overlay__book-info__about__second-wrapper__pages"
-);
-const publisherEl: Element | null = document.querySelector(
-  ".overlay__book-info__about__second-wrapper__publisher"
-);
-const bookContainer: Element | null =
-  document.querySelector(".container__books");
-
+// har kvar den i ts huvudfil för det är en let och värdet ska ändras i denna modulen.
 let containerBookel: NodeListOf<Element> =
   document.querySelectorAll(".container__book");
 
 getData();
-
-const contentBooks = async (index: number): Promise<void> => {
-  const data: Book[] = await getData();
-  bookColorEl.style.backgroundColor = `${data[index].color}`;
-  if (titleEl) {
-    titleEl.innerHTML = data[index].title;
-  }
-  if (authorEl) {
-    authorEl.innerHTML = data[index].author;
-  }
-  if (bookImageTitleEl) {
-    bookImageTitleEl.innerHTML = data[index].title;
-  }
-  if (bookImageAuthorEl) {
-    bookImageAuthorEl.innerHTML = data[index].author;
-  }
-  if (infoTextEL) {
-    infoTextEL.innerHTML = data[index].plot;
-  }
-  if (audienceEl) {
-    audienceEl.innerHTML = ` Audience: ${data[index].audience}`;
-  }
-  if (publishedEL) {
-    publishedEL.innerHTML = `First published: ${data[index].year}`;
-  }
-  if (pagesEL) {
-    pagesEL.innerHTML = `Pages: ${data[index].pages}`;
-  }
-  if (publisherEl) {
-    publisherEl.innerHTML = ` Publisher:${data[index].publisher}`;
-  }
-
-  overlayEl.style.display = "flex";
-};
-
-iconEl.addEventListener("click", (): void => {
-  overlayEl.style.display = "none";
-});
 
 const renderMainPageInfo = async (): Promise<void> => {
   try {
@@ -131,19 +61,17 @@ const renderMainPageInfo = async (): Promise<void> => {
   }
 };
 
-// containerBookel
-// contentBooks
-// måste fixa så de blir dynamiskt med id etc om man ex skulle lögga til fler böcker i databasen
-
 renderMainPageInfo();
 
-const searchFieldEl = document.querySelector("#search") as HTMLInputElement;
+// skulle kunna göra om så när containerBookEl jobbar med
+//contentBooks så de blir mer dynamiskt när man nån kanske lägger till
+// fler böcker i API:t, men det fungerar för denna uppg.
 
 searchFieldEl?.addEventListener("input", async (e: Event) => {
   const data = await getData();
   const target = e.target as HTMLInputElement;
   console.log(target.value);
-  let dataDisplay = data
+  let dataDisplay: string[] = data
     .filter((data: Book) => {
       if (target.value === "") {
         return data;
@@ -173,15 +101,15 @@ searchFieldEl?.addEventListener("input", async (e: Event) => {
 
   containerBookel.forEach((el: Element) => {
     el.addEventListener("click", () => {
-      const bookId = (el as HTMLElement).getAttribute("data-id");
+      const bookId: string | null = (el as HTMLElement).getAttribute("data-id");
 
       if (bookId) {
-        // Find the corresponding book data by id
-        const selectedBook = data.find((book) => book.id === parseInt(bookId));
+        const selectedBook: Book | undefined = data.find(
+          (book) => book.id === parseInt(bookId)
+        );
 
         if (selectedBook) {
-          // Call contentBooks with the index of the selected book
-          const selectedBookIndex = data.indexOf(selectedBook);
+          const selectedBookIndex: number = data.indexOf(selectedBook);
           contentBooks(selectedBookIndex);
         }
       }
@@ -189,8 +117,6 @@ searchFieldEl?.addEventListener("input", async (e: Event) => {
   });
 });
 
-//att göra
-
-//styla css html
-// statiska typer och interface
-// Ha delat upp din kod i moduler i Typescript, alla interface ska ligga i en egen modul och importeras.
+iconEl.addEventListener("click", (): void => {
+  overlayEl.style.display = "none";
+});

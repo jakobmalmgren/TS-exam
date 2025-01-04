@@ -1,0 +1,15 @@
+export const bookColorEl = document.querySelector(".overlay__book-img");
+export const titleEl = document.querySelector(".overlay__book-info__title");
+export const authorEl = document.querySelector(".overlay__book-info__author");
+export const bookImageTitleEl = document.querySelector(".overlay__book-img__wrapper__title");
+export const bookImageAuthorEl = document.querySelector(".overlay__book-img__wrapper__author");
+export const infoTextEL = document.querySelector(".overlay__book-info__text");
+export const audienceEl = document.querySelector(".overlay__book-info__about__first-wrapper__audience");
+export const publishedEL = document.querySelector(".overlay__book-info__about__first-wrapper__published");
+export const pagesEL = document.querySelector(".overlay__book-info__about__second-wrapper__pages");
+export const publisherEl = document.querySelector(".overlay__book-info__about__second-wrapper__publisher");
+export const overlayEl = document.querySelector(".overlay");
+export const iconEl = document.querySelector(".overlay__icon-wrapper");
+export const bookContainer = document.querySelector(".container__books");
+export const searchFieldEl = document.querySelector("#search");
+export const containerHeaderEl = document.querySelector(".container__header");

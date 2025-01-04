@@ -1,4 +1,4 @@
-import { Book } from "./interfaces/Book.js"; // varför js när de e ts?
+import { Book } from "./interfaces/Book.js";
 export const getData = async (): Promise<Book[]> => {
   let data: Book[] = [];
   try {

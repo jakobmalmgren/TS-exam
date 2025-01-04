@@ -7,58 +7,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getData } from "./fetchApi.js"; // varför js när de e ts??
-const containerHeaderEl = document.querySelector(".container__header");
-const overlayEl = document.querySelector(".overlay");
-const iconEl = document.querySelector(".overlay__icon-wrapper");
-const bookColorEl = document.querySelector(".overlay__book-img");
-const titleEl = document.querySelector(".overlay__book-info__title");
-const authorEl = document.querySelector(".overlay__book-info__author");
-const bookImageTitleEl = document.querySelector(".overlay__book-img__wrapper__title");
-const bookImageAuthorEl = document.querySelector(".overlay__book-img__wrapper__author");
-const infoTextEL = document.querySelector(".overlay__book-info__text");
-const audienceEl = document.querySelector(".overlay__book-info__about__first-wrapper__audience");
-const publishedEL = document.querySelector(".overlay__book-info__about__first-wrapper__published");
-const pagesEL = document.querySelector(".overlay__book-info__about__second-wrapper__pages");
-const publisherEl = document.querySelector(".overlay__book-info__about__second-wrapper__publisher");
-const bookContainer = document.querySelector(".container__books");
+import { overlayEl, iconEl, bookContainer, searchFieldEl, containerHeaderEl, } from "./variables.js";
+import { getData } from "./fetchApi.js";
+import { contentBooks } from "./modalRender.js";
+// har kvar den i ts huvudfil för det är en let och värdet ska ändras i denna modulen.
 let containerBookel = document.querySelectorAll(".container__book");
 getData();
-const contentBooks = (index) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield getData();
-    bookColorEl.style.backgroundColor = `${data[index].color}`;
-    if (titleEl) {
-        titleEl.innerHTML = data[index].title;
-    }
-    if (authorEl) {
-        authorEl.innerHTML = data[index].author;
-    }
-    if (bookImageTitleEl) {
-        bookImageTitleEl.innerHTML = data[index].title;
-    }
-    if (bookImageAuthorEl) {
-        bookImageAuthorEl.innerHTML = data[index].author;
-    }
-    if (infoTextEL) {
-        infoTextEL.innerHTML = data[index].plot;
-    }
-    if (audienceEl) {
-        audienceEl.innerHTML = ` Audience: ${data[index].audience}`;
-    }
-    if (publishedEL) {
-        publishedEL.innerHTML = `First published: ${data[index].year}`;
-    }
-    if (pagesEL) {
-        pagesEL.innerHTML = `Pages: ${data[index].pages}`;
-    }
-    if (publisherEl) {
-        publisherEl.innerHTML = ` Publisher:${data[index].publisher}`;
-    }
-    overlayEl.style.display = "flex";
-});
-iconEl.addEventListener("click", () => {
-    overlayEl.style.display = "none";
-});
 const renderMainPageInfo = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield getData();
@@ -108,11 +62,10 @@ const renderMainPageInfo = () => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
     }
 });
-// containerBookel
-// contentBooks
-// måste fixa så de blir dynamiskt med id etc om man ex skulle lögga til fler böcker i databasen
 renderMainPageInfo();
-const searchFieldEl = document.querySelector("#search");
+// skulle kunna göra om så när containerBookEl jobbar med
+//contentBooks så de blir mer dynamiskt när man nån kanske lägger till
+// fler böcker i API:t, men det fungerar för denna uppg.
 searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addEventListener("input", (e) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield getData();
     const target = e.target;
@@ -145,10 +98,8 @@ searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addE
         el.addEventListener("click", () => {
             const bookId = el.getAttribute("data-id");
             if (bookId) {
-                // Find the corresponding book data by id
                 const selectedBook = data.find((book) => book.id === parseInt(bookId));
                 if (selectedBook) {
-                    // Call contentBooks with the index of the selected book
                     const selectedBookIndex = data.indexOf(selectedBook);
                     contentBooks(selectedBookIndex);
                 }
@@ -156,7 +107,6 @@ searchFieldEl === null || searchFieldEl === void 0 ? void 0 : searchFieldEl.addE
         });
     });
 }));
-//att göra
-//styla css html
-// statiska typer och interface
-// Ha delat upp din kod i moduler i Typescript, alla interface ska ligga i en egen modul och importeras.
+iconEl.addEventListener("click", () => {
+    overlayEl.style.display = "none";
+});
