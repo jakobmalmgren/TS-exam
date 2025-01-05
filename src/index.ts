@@ -37,22 +37,12 @@ const renderMainPageInfo = async (): Promise<void> => {
 
     containerBookel.forEach((el: Element, index: number) => {
       el.addEventListener("click", () => {
-        if (index === 0) {
-          contentBooks(0);
-        } else if (index === 1) {
-          contentBooks(1);
-        } else if (index === 2) {
-          contentBooks(2);
-        } else if (index === 3) {
-          contentBooks(3);
-        } else if (index === 4) {
-          contentBooks(4);
-        } else if (index === 5) {
-          contentBooks(5);
-        } else if (index === 6) {
-          contentBooks(6);
-        } else if (index === 7) {
-          contentBooks(7);
+        //
+        const bookId: any = (el as HTMLElement).getAttribute("data-id");
+
+        if (index === bookId - 1) {
+          console.log("hje");
+          contentBooks(index);
         }
       });
     });
@@ -62,10 +52,6 @@ const renderMainPageInfo = async (): Promise<void> => {
 };
 
 renderMainPageInfo();
-
-// skulle kunna göra om så när containerBookEl jobbar med
-//contentBooks så de blir mer dynamiskt när nån kanske lägger till
-// fler böcker i API:t, men det fungerar för denna uppg.
 
 searchFieldEl?.addEventListener("input", async (e: Event) => {
   const data = await getData();
